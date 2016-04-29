@@ -2,11 +2,11 @@
 """
 Created on Mon Mar 14 15:09:14 2016
 
-@author: apple
+@author: Alicia Jin
 """
 
 '''
-
+new api
 >> pip install geopy
 '''
 import numpy as np
@@ -14,18 +14,16 @@ import pandas as pd
 from geopy.geocoders import Nominatim
 from sklearn import neighbors
 
-train = pd.read_csv('/users/apple/Documents/tasks/zillow/training_ZILLOW_CONFIDENTIAL.csv')
-valid = pd.read_csv('/users/apple/Documents/tasks/zillow/validation_ZILLOW_CONFIDENTIAL.csv')
+train = pd.read_csv('training.csv')
+valid = pd.read_csv('validation.csv')
 
 train['latitude'] = train['latitude']/1000000.0
 valid['latitude'] = valid['latitude']/1000000.0
 train['longitude'] = train['longitude']/1000000.0
 valid['longitude'] = valid['longitude']/1000000.0
 
-
 zipcode_train, i = [], 0
 geolocator = Nominatim()
-# 
 
 for x,y in zip(train['latitude'].loc[392:], train['longitude'].loc[392:]):
     location = geolocator.reverse(str(x)+', '+str(y)).raw
@@ -39,9 +37,8 @@ for x,y in zip(train['latitude'].loc[392:], train['longitude'].loc[392:]):
     i+=1
     zipcode_train.append(zcode)
     
-
 ################################
- ############
+############
 for x,y in zip(valid['latitude'].loc[2276:], valid['longitude'].loc[2276:]):
     location = geolocator.reverse(str(x)+', '+str(y)).raw
     print j
@@ -58,7 +55,7 @@ train['zipcode'] = pd.DataFrame(zipcode_train)
 valid['zipcode'] = pd.DataFrame(zipcode_valid)
 
 ### get average price  ####
-avgprice = pd.read_csv('/users/apple/Documents/tasks/zillow/avg_value_2015.csv')
+avgprice = pd.read_csv('avg_value_2015.csv')
 avgprice['fake'] = [0]*len(avgprice)
 
 knn = neighbors.KNeighborsClassifier(n_neighbors = 1)
@@ -82,8 +79,8 @@ train = train.drop(['fake'], axis = 1)
 valid = valid.drop(['fake'], axis = 1)
 #####
 
-train.to_csv('/users/apple/Documents/tasks/zillow/training2.csv')
-valid.to_csv('/users/apple/Documents/tasks/zillow/validation2.csv')
+train.to_csv('training2.csv')
+valid.to_csv('validation2.csv')
 
 
 
