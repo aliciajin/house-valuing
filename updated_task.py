@@ -2,7 +2,7 @@
 """
 Created on Sun Mar 13 21:44:33 2016
 
-@author: Alicia
+@author: Alicia Jin
 """
 
 import numpy as np
@@ -14,8 +14,8 @@ from sklearn import neighbors
 from sklearn import cross_validation, linear_model
 from sklearn.cross_validation import KFold
 
-train = pd.read_csv('/users/apple/Documents/tasks/zillow/training2.csv')
-valid = pd.read_csv('/users/apple/Documents/tasks/zillow/validation2.csv')
+train = pd.read_csv('training2.csv')
+valid = pd.read_csv('validation2.csv')
 
 #### preprocessing
 train['transdate'] = pd.to_datetime(train['transdate'])
@@ -261,7 +261,7 @@ def scatter(key1, key2):
     plt.gcf().autofmt_xdate()
 
 
-#### plot all
+#### plot all, ooptional
 '''
 index1 = [241,242,243,244,245,246,247,248]
 index2 = [241,242,243,244,245]
